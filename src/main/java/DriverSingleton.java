@@ -6,7 +6,7 @@ public class DriverSingleton {
     private static DriverSingleton instance =null;
     private static WebDriver driver;
     private DriverSingleton(){
-        instatntiate("chrome");
+        instatntiate("chrome ");
     }
     public WebDriver instatntiate(String strategy){
         DriverStrategy driverStrategy = DriverStrategyImplimentor.chooseStrategy(strategy);
