@@ -5,8 +5,9 @@ import java.util.concurrent.TimeUnit;
 public class DriverSingleton {
     private static DriverSingleton instance =null;
     private static WebDriver driver;
-    private DriverSingleton(){
-        instatntiate("chrome ");
+
+    private DriverSingleton(String driver){
+        instatntiate(driver);
     }
     public WebDriver instatntiate(String strategy){
         DriverStrategy driverStrategy = DriverStrategyImplimentor.chooseStrategy(strategy);
@@ -16,9 +17,9 @@ public class DriverSingleton {
         return driver;
     }
 
-    public static DriverSingleton getInstance(){
+    public static DriverSingleton getInstance(String driver){
         if(instance==null){
-            instance = new DriverSingleton();
+            instance = new DriverSingleton(driver);
         }
         return instance;
     }
@@ -26,7 +27,7 @@ public class DriverSingleton {
         instance=null;
         driver.quit();
     }
-    public static WebDriver  getDriver(){
+    public static WebDriver getDriver(){
         return driver;
     }
 
