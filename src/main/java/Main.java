@@ -9,6 +9,6 @@ public class Main {
         DriverSingleton driverSingleton= DriverSingleton.getInstance(frameworkProperties.getProperty("browser"));
 
         WebDriver driver=DriverSingleton.getDriver();
-        driver.get("https://www.google.com");
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
     }
 }

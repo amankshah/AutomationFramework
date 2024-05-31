@@ -16,7 +16,7 @@ public class DriverStrategyImplimentor {
             case Constants.PHANTOMJS:
                 return new PhantomJs();
             default:
-                return new DriverStrategy();
+                return null ;
         }
     }
 }
