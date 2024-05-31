@@ -8,4 +8,13 @@ public class Constants {
     public static final String EDGE = "edge";
     public static final String FIREFOX = "firefox";
     public static final String PHANTOMJS = "phantomjs";
+
+
+
+    //Project Constants
+
+        //Shop Page
+            public static final String CART_QUANTITY="1";
+
+
 }
