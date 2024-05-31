@@ -1,11 +1,14 @@
 import Pages.Homepage;
 import Pages.SignInPage;
 import drivers.DriverSingleton;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.FrameworkProperties;
-
-public class Main {
-
+public class TestRunner {
     public static void main(String[] args) {
         FrameworkProperties frameworkProperties = new FrameworkProperties();
         DriverSingleton driverSingleton= DriverSingleton.getInstance(frameworkProperties.getProperty("browser"));
@@ -13,19 +16,14 @@ public class Main {
         WebDriver driver=DriverSingleton.getDriver();
         driver.get("https://bitheap.tech/");
 
-        Homepage homepage = new Homepage();
-        SignInPage signInPage = new SignInPage();
 
-        homepage.clickLoginButton();
-        signInPage.logIn("amanshah","Aman@123");
+  WebElement loginButton= driver.findElement(By.cssSelector("#menu-item-2017 > a"));
 
-        if(homepage.getUserName().equals("Hello, Aman")){
-            System.out.println("Test Case Passed");
-        }else {
-            System.out.println("Failed" );
-            System.out.println(homepage.getUserName());
-        }
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+        loginButton.click();
 
-        DriverSingleton.closeObjectInstance();
+
+
     }
 }
