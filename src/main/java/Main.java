@@ -30,7 +30,7 @@ public class Main {
 
 
         homepage.clickLoginButton();
-        signInPage.logIn("amanshah","Aman@123");
+            signInPage.logIn(frameworkProperties.getProperty("username"),frameworkProperties.getProperty("password"));
 
         if(homepage.getUserName().equals("Hello, Aman")){
             System.out.println("User  is logedin sucessfully");
