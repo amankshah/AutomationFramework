@@ -27,7 +27,8 @@ public class DriverSingleton {
         }
         return instance;
     }
-    public  static void closeObjectInstance(){
+    public  static void closeObjectInstance() throws InterruptedException {
+        Thread.sleep(5000);
         instance=null;
         driver.quit();
     }
