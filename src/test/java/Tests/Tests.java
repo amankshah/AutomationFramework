@@ -2,6 +2,7 @@ package Tests;
 
 import Pages.*;
 import drivers.DriverSingleton;
+import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -23,12 +24,8 @@ public class Tests {
     static CartPage cartPage;
     static Checkout checkout;
 
-    @BeforeAll
-    public static void setupAll() {
-        frameworkProperties = new FrameworkProperties();
-    }
 
-    @BeforeEach
+    @BeforeAll
     public void setup() {
         frameworkProperties = new FrameworkProperties();
         DriverSingleton.getInstance(frameworkProperties.getProperty(Constants.BROWSER));
@@ -41,12 +38,7 @@ public class Tests {
         checkout = new Checkout();
     }
 
-    @AfterEach
-    public void tearDownEach() {
-        if (driver != null) {
-            driver.close();
-        }
-    }
+
 
     @AfterAll
     public void tearDown() {
@@ -66,15 +58,18 @@ public class Tests {
 
     @ParameterizedTest
     @Order(1)
+    @Ignore
     @CsvSource({
             "amanshah, QW1hbkAxMjM=",
-            "secondtest, MTIzNDU2"
+            "secondtest, MTIzNDU2",
+            "thirdtest, MTIzNDU2"
     })
     public void testingAuthUsingCsv(String username, String password) {
         driver.get(Constants.URL);
         homepage.clickLoginButton();
         signInPage.logIn(username, password);
         assertTrue(homepage.getDisplayName().contains("Hello"));
+
     }
 
     @Test

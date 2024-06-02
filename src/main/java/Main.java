@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import utils.CommonFunctions;
 import utils.Constants;
 import utils.FrameworkProperties;
+import utils.Utils;
+
+import static utils.Utils.getRandomString;
 
 public class Main {
 
@@ -29,7 +32,8 @@ public class Main {
 // Wait for the page to adjust after zoom
 //        Thread.sleep(2000);
 
-
+        Utils.takeScreenshot("Homepage");
+        Utils.takeScreenshot();
         homepage.clickLoginButton();
             signInPage.logIn(frameworkProperties.getProperty("username"),frameworkProperties.getProperty("password"));
 
@@ -39,6 +43,8 @@ public class Main {
             System.out.println("User is not logedin" );
             System.out.println(homepage.getDisplayName());
         }
+
+
 
         //Navigating to shop page
         homepage.clickShopButton();
@@ -51,5 +57,12 @@ public class Main {
         checkout.getOrderStatus();
 
         DriverSingleton.closeObjectInstance();
+    }
+
+    public static void StringTest(String[] args) {
+        System.out.println(getRandomString(10));
+        System.out.println(getRandomString(10));
+        System.out.println(getRandomString(10));
+        System.out.println(getRandomString(10));
     }
 }

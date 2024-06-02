@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.CommonFunctions;
 import utils.Constants;
+import utils.Utils;
 
 import static utils.Constants.ORDER_STATUS;
 
@@ -133,7 +134,8 @@ public class Checkout {
         if (orderStatus.getText().equals(ORDER_STATUS)) {
             System.out.println("Order Status: " + orderStatus.getText());
             System.out.println("Order Number: " + orderNumber.getText());
-
+//            utils.Utils.takeScreenshot();
+            Utils.takeScreenshot("OrderPlaced",orderStatus);
             System.out.println("Conrgatuations, your order has been placed!🎉");
         }else{
             System.out.println("Order Status: " + orderStatus.getText());

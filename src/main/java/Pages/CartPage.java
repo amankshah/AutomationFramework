@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.CommonFunctions;
+import utils.Utils;
 
 public class CartPage {
     private WebDriver driver;
@@ -28,6 +29,7 @@ public class CartPage {
             CommonFunctions.clickElement(proceedToCheckoutButton);
         } catch (Exception e) {
             try {
+                Utils.takeScreenshot();
                 System.out.println("Standard click failed, Adding to cart using Url");
                 driver.get("https://bitheap.tech/checkout/");
             } catch (Exception ex) {

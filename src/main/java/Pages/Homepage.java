@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.CommonFunctions;
+import utils.Utils;
 
 public class Homepage {
     private WebDriver driver;
@@ -52,9 +53,17 @@ public class Homepage {
             System.out.println("Login Button is displayed: " + loginButton.isDisplayed());
 
             try {
-                loginButton.click();
+
+                try {
+                    loginButton.click();
+                } catch (Exception e) {
+                    Utils.takeScreenshot();
+
+                    CommonFunctions.clickElement(loginButton);
+                }
             } catch (Exception e) {
                 System.out.println("Standard click failed, attempting JavaScript click.");
+                Utils.takeScreenshot();
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("arguments[0].click();", loginButton);
             }
@@ -71,6 +80,7 @@ public class Homepage {
             shopButton.click();
         } catch (Exception e) {
             CommonFunctions.clickElement(shopButton);
+            Utils.takeScreenshot();
             throw new RuntimeException(e);
         }
 
