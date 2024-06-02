@@ -2,6 +2,7 @@ import Pages.*;
 import drivers.DriverSingleton;
 import org.openqa.selenium.WebDriver;
 import utils.CommonFunctions;
+import utils.Constants;
 import utils.FrameworkProperties;
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
         DriverSingleton driverSingleton= DriverSingleton.getInstance(frameworkProperties.getProperty("browser"));
 
         WebDriver driver=DriverSingleton.getDriver();
-        driver.get("https://bitheap.tech/");
+        driver.get(Constants.URL);
 
         Homepage homepage = new Homepage();
         SignInPage signInPage = new SignInPage();
@@ -32,11 +33,11 @@ public class Main {
         homepage.clickLoginButton();
             signInPage.logIn(frameworkProperties.getProperty("username"),frameworkProperties.getProperty("password"));
 
-        if(homepage.getUserName().equals("Hello, Aman")){
+        if(homepage.getDisplayName().equals(frameworkProperties.getProperty("username"))){
             System.out.println("User  is logedin sucessfully");
         }else {
             System.out.println("User is not logedin" );
-            System.out.println(homepage.getUserName());
+            System.out.println(homepage.getDisplayName());
         }
 
         //Navigating to shop page

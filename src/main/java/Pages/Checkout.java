@@ -124,7 +124,7 @@ public class Checkout {
     }
 
 
-    public void  getOrderStatus() {
+    public String  getOrderStatus() {
         CommonFunctions.waitUntilWebElementVisible(orderStatus);
         //Wait until the page loads
         CommonFunctions.waitUntilWebElementVisible(orderNumber);
@@ -138,6 +138,8 @@ public class Checkout {
         }else{
             System.out.println("Order Status: " + orderStatus.getText());
         }
+
+        return orderStatus.getText();
 
     }
 }

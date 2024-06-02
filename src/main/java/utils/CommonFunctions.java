@@ -1,4 +1,5 @@
 package utils;
+
 import drivers.DriverSingleton;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -6,14 +7,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static utils.Constants.*;
+import static utils.Constants.EXPLICIT_WAIT_TIME;
 
 public class CommonFunctions {
-    public static void waitUntilWebElementVisible(WebElement webElement){
+    public static void waitUntilWebElementVisible(WebElement webElement) {
         //wait until the element is visible
         WebDriverWait wait = new WebDriverWait(DriverSingleton.getDriver(), EXPLICIT_WAIT_TIME);
         wait.until(ExpectedConditions.visibilityOf(webElement));
-        System.out.println(webElement.getText() + " is displayed: "+ webElement.isDisplayed());
+        System.out.println(webElement.getText() + " is displayed: " + webElement.isDisplayed());
 
     }
 
@@ -132,9 +133,8 @@ public class CommonFunctions {
         String currentUrl = DriverSingleton.getDriver().getCurrentUrl();
         // Print the current URL
         System.out.println("Current URL: " + currentUrl);
-        String currentUrl1 = currentUrl;
-        return currentUrl1;
-    
+        return currentUrl;
+
     }
 
 

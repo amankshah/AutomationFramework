@@ -1,6 +1,7 @@
 package utils;
 
 import java.nio.file.LinkOption;
+import utils.FrameworkProperties;
 
 public class Constants {
     public static final String PROP_FILE_NAME = "framework.properties";
@@ -13,11 +14,21 @@ public class Constants {
 
     public static final long EXPLICIT_WAIT_TIME = 10;
 
+    public static final String BROWSER = "browser";
+
 
     //Project Constants
+    //Homepage Url
+    public static final String URL = "https://bitheap.tech/";
+
+    //Homepage Elements
+        //Login Page
+            public static final String USERNAME="username";
+            public static final String PASSWORD="password";
+            public static final String DISPLAY_NAME ="display_name";
 
         //Shop Page
-            public static final String CART_QUANTITY="1";
+            public static final long CART_QUANTITY=1;
 
         //Checkout Page
 

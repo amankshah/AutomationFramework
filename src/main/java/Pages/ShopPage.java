@@ -42,14 +42,18 @@ public class ShopPage {
 
             driver.get("https://bitheap.tech/shop/?add-to-cart=211");
         }
-        Thread.sleep(2000);
-        if(productCount.getText().contains(Constants.CART_QUANTITY)) {
-            System.out.println("Product is added to the Cart");
-        }else{
-            System.out.println("Product Not added to cart");
-        }
+
     }
 
+    public  long getCartProductCount() throws InterruptedException {
+        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver,15);
+        wait.until(ExpectedConditions.elementToBeClickable(productCount));
+        System.out.println("productCount is displayed: "+ productCount.isDisplayed());
+        System.out.println(productCount.getText());
+        return Integer.parseInt(productCount.getText());
+
+    }
     public void clickOnCartButton(){
         WebDriverWait wait = new WebDriverWait(driver,15);
         wait.until(ExpectedConditions.elementToBeClickable(cartButton));

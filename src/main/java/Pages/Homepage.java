@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.CommonFunctions;
 
 public class Homepage {
     private WebDriver driver;
@@ -24,7 +25,7 @@ public class Homepage {
     private WebElement shopButton;
 
     @FindBy(id = "menu-item-2020")
-    private WebElement username;
+    private WebElement displayName;
 
     @FindBy(id = "mp_form_fixed_bar1")
     private WebElement mpFormFixedBar;
@@ -66,10 +67,16 @@ public class Homepage {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(shopButton));
         System.out.println("shopButton is displayed: " + shopButton.isDisplayed());
-        shopButton.click();
+        try {
+            shopButton.click();
+        } catch (Exception e) {
+            CommonFunctions.clickElement(shopButton);
+            throw new RuntimeException(e);
+        }
+
     }
 
-    public String getUserName() {
-        return username.getText();
+    public String getDisplayName() {
+        return displayName.getText();
     }
 }
