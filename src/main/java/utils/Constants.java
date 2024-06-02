@@ -15,7 +15,7 @@ public class Constants {
     public static final long EXPLICIT_WAIT_TIME = 10;
 
     public static final String BROWSER = "browser";
-
+    public static final String SCREENSHOT_FOLDER = "screenshots\\";
 
     //Project Constants
     //Homepage Url
