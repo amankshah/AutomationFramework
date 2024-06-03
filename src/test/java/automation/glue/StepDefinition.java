@@ -1,11 +1,17 @@
 package automation.glue;
 
+import automation.ExtentReport.TestCases;
 import automation.Pages.*;
 import automation.config.AutomationFrameworkConfiguration;
 import automation.drivers.DriverSingleton;
 import automation.utils.ConfigurationProperties;
 import automation.utils.Constants;
 import automation.utils.FrameworkProperties;
+import automation.utils.Utils;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
 
+import static com.relevantcodes.extentreports.utils.DateTimeUtil.getDate;
 import static org.junit.Assert.assertTrue;
 
 @CucumberContextConfiguration
@@ -27,6 +34,10 @@ public class StepDefinition {
     private Checkout checkout;
     private CartPage cartPage;
     private ShopPage shopPage;
+
+    //Adding Extent Reports For Cucumber
+        ExtentTest test;
+        static ExtentReports reports = new ExtentReports("report/TestReport-"+ Utils.getDateTime() +".html");
 
     @Autowired
     ConfigurationProperties configurationProperties;
@@ -40,47 +51,57 @@ public class StepDefinition {
         checkout = new Checkout();
         cartPage = new CartPage();
         shopPage = new ShopPage();
+        TestCases[] tests= TestCases.values();
+        test = reports.startTest(tests[Utils.testCount].getTestName());
+        Utils.testCount++;
+
     }
 
     @Given("^I go to the website")
     public void i_go_to_the_website() {
         driver=DriverSingleton.getDriver();
         driver.get(Constants.URL);
+        test.log(LogStatus.PASS, "Navigated to " + Constants.URL);
 
     }
 
     @When("^I click on Login Button")
     public void i_click_on_login_button() {
         homepage.clickLoginButton();
+        test.log(LogStatus.PASS, "Clicked on Login Button");
     }
 
     @When("^I specify my credentials and click Login")
     public void i_specify_my_credentials_and_click_login() {
         signInPage.logIn(configurationProperties.getSignInUser(), configurationProperties.getPassword());
-
+        test.log(LogStatus.PASS, "Added Credentials and Clicked on Submit Buttons");
     }
     @Then("^I can log into the website")
     public void i_can_log_into_the_website() {
+        if (configurationProperties.getSignInUser().equals(homepage.getDisplayName())) {
+            test.log(LogStatus.PASS, "Logged In Successful");
+        }else{
+            test.log(LogStatus.FAIL, "Login Failed");
+        }
         assertTrue(homepage.getDisplayName().contains("Hello"));
+
     }
 
 
     //Adding 2nd test
-//    @When("^I go to the website")
-//    public void i_go_to_the_website() {
-//        driver=DriverSingleton.getDriver();
-//        driver.get(Constants.URL);
-//    }
+
 
     @When("^I click on Shop Button")
     public void i_click_on_shop_button() {
         homepage.clickShopButton();
+        test.log(LogStatus.PASS, "Clicked on Shop Button");
     }
 
     @When("^I add product to cart")
     public void i_add_product_to_cart() throws InterruptedException {
         shopPage.ShortProducts();
         shopPage.addProductToCart();
+        test.log(LogStatus.PASS, "Added Product to Cart");
     }
 
     @When("^I confirm address, shipping, payment and final order")
@@ -89,14 +110,26 @@ public class StepDefinition {
         cartPage.clickOnProceedButton();
         checkout.fillAddressDetails();
         checkout.placeOrder();
+        test.log(LogStatus.PASS, "Placed Order");
 
     }
 
     @Then("^The element are bought")
     public void the_element_are_bought() {
+        if (checkout.getOrderStatus().contains(Constants.ORDER_STATUS)) {
+            test.log(LogStatus.PASS, "Order Placed");
+        }else{
+            test.log(LogStatus.FAIL, "Order Failed");
+
+        }
         assertTrue(checkout.getOrderStatus().contains(Constants.ORDER_STATUS));
     }
 
-
+@After
+public void closeObjects() throws InterruptedException {
+    reports.endTest(test);
+    reports.flush();
+    DriverSingleton.closeObjectInstance();
+    }
 
 }

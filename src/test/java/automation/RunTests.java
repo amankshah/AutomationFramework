@@ -12,5 +12,7 @@ import org.junit.runner.RunWith;
         glue = "automation.glue" // Specify the package containing step definitions
 )
 public class RunTests {
+
     // No need for a @Test method here
+
 }

@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.Base64;
 
 public class Utils {
+    public static int testCount=0; //This is used in Extent Report Generation
+
     public static  String decode(String encodedString) {
         Base64.Decoder decoder = Base64.getDecoder();
         return new String(decoder.decode(encodedString));
