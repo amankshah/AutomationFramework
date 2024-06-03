@@ -1,14 +1,14 @@
-package Pages;
+package automation.Pages;
 
-import drivers.DriverSingleton;
+import automation.drivers.DriverSingleton;
+import automation.utils.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.CommonFunctions;
-import utils.Utils;
+import automation.utils.CommonFunctions;
 
 public class CartPage {
     private WebDriver driver;

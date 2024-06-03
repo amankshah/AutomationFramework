@@ -1,18 +1,16 @@
-package utils;
+package automation.utils;
 
-import drivers.DriverSingleton;
+import automation.drivers.DriverSingleton;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static utils.Constants.EXPLICIT_WAIT_TIME;
-
 public class CommonFunctions {
     public static void waitUntilWebElementVisible(WebElement webElement) {
         //wait until the element is visible
-        WebDriverWait wait = new WebDriverWait(DriverSingleton.getDriver(), EXPLICIT_WAIT_TIME);
+        WebDriverWait wait = new WebDriverWait(DriverSingleton.getDriver(), Constants.EXPLICIT_WAIT_TIME);
         wait.until(ExpectedConditions.visibilityOf(webElement));
         System.out.println(webElement.getText() + " is displayed: " + webElement.isDisplayed());
 
@@ -21,7 +19,7 @@ public class CommonFunctions {
     public static void selectByValue(WebElement dropdown, String value) {
         // wait until the dropdown is visible
         WebDriverWait wait;
-        wait = new WebDriverWait(DriverSingleton.getDriver(), EXPLICIT_WAIT_TIME);
+        wait = new WebDriverWait(DriverSingleton.getDriver(), Constants.EXPLICIT_WAIT_TIME);
         wait.until(ExpectedConditions.visibilityOf(dropdown));
 
         // create an instance of the Select class
@@ -37,7 +35,7 @@ public class CommonFunctions {
     public static void selectByIndex(WebElement dropdown, int index) {
         // wait until the dropdown is visible
         WebDriverWait wait;
-        wait = new WebDriverWait(DriverSingleton.getDriver(), EXPLICIT_WAIT_TIME);
+        wait = new WebDriverWait(DriverSingleton.getDriver(), Constants.EXPLICIT_WAIT_TIME);
         wait.until(ExpectedConditions.visibilityOf(dropdown));
 
         // create an instance of the Select class
@@ -53,7 +51,7 @@ public class CommonFunctions {
     public static void selectByVisibleText(WebElement dropdown, String text) {
         // wait until the dropdown is visible
         WebDriverWait wait;
-        wait = new WebDriverWait(DriverSingleton.getDriver(), EXPLICIT_WAIT_TIME);
+        wait = new WebDriverWait(DriverSingleton.getDriver(), Constants.EXPLICIT_WAIT_TIME);
         wait.until(ExpectedConditions.visibilityOf(dropdown));
 
         // create an instance of the Select class
@@ -71,7 +69,7 @@ public class CommonFunctions {
         JavascriptExecutor js = (JavascriptExecutor) DriverSingleton.getDriver();
         // wait until the element is clickable
         WebDriverWait wait;
-        wait = new WebDriverWait(DriverSingleton.getDriver(), EXPLICIT_WAIT_TIME);
+        wait = new WebDriverWait(DriverSingleton.getDriver(), Constants.EXPLICIT_WAIT_TIME);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
         // execute javascript click command
         js.executeScript("arguments[0].click();", webElement);
@@ -81,7 +79,7 @@ public class CommonFunctions {
     }
 
     public static void clickElement(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(DriverSingleton.getDriver(), EXPLICIT_WAIT_TIME);
+        WebDriverWait wait = new WebDriverWait(DriverSingleton.getDriver(), Constants.EXPLICIT_WAIT_TIME);
 
         try {
             //WAIT UNTIL element is visible

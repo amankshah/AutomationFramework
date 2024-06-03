@@ -1,12 +1,12 @@
-package Pages;
+package automation.Pages;
 
-import drivers.DriverSingleton;
+import automation.drivers.DriverSingleton;
+import automation.utils.CommonFunctions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.Utils;
+import automation.utils.Utils;
 
 public class SignInPage {
     private WebDriver driver;
@@ -26,10 +26,22 @@ public class SignInPage {
     private  WebElement loginButton;
 
     public void logIn(String username,String password){
+        userNameFilled.clear();
         userNameFilled.sendKeys(username);
+        passwordFilled.clear();
         passwordFilled.sendKeys(Utils.decode(password));
-        loginButton.click();
+        try {
+            loginButton.click();
+        } catch (Exception e) {
+            try {
+                CommonFunctions.clickElement(loginButton);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+
+        }
 
     }
+
 
 }

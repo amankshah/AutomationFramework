@@ -1,8 +1,6 @@
-package drivers.strategies;
+package automation.drivers.strategies;
 
-import utils.Constants;
-
-import java.util.Locale;
+import automation.utils.Constants;
 
 public class DriverStrategyImplimentor {
     public static DriverStrategy chooseStrategy(String strategy) {

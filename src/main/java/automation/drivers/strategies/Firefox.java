@@ -1,4 +1,4 @@
-package drivers.strategies;
+package automation.drivers.strategies;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

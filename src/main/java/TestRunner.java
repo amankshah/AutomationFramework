@@ -1,13 +1,10 @@
-import Pages.Homepage;
-import Pages.SignInPage;
-import drivers.DriverSingleton;
+import automation.drivers.DriverSingleton;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.FrameworkProperties;
+import automation.utils.FrameworkProperties;
 public class TestRunner {
     public static void main(String[] args) {
         FrameworkProperties frameworkProperties = new FrameworkProperties();

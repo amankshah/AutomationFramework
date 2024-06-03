@@ -1,6 +1,7 @@
-package Pages;
+package automation.Pages;
 
-import drivers.DriverSingleton;
+import automation.drivers.DriverSingleton;
+import automation.utils.Utils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,8 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.CommonFunctions;
-import utils.Utils;
+import automation.utils.CommonFunctions;
+
+import static automation.utils.Utils.takeScreenshot;
 
 public class Homepage {
     private WebDriver driver;
@@ -57,13 +59,13 @@ public class Homepage {
                 try {
                     loginButton.click();
                 } catch (Exception e) {
-                    Utils.takeScreenshot();
+                    takeScreenshot();
 
                     CommonFunctions.clickElement(loginButton);
                 }
             } catch (Exception e) {
                 System.out.println("Standard click failed, attempting JavaScript click.");
-                Utils.takeScreenshot();
+                takeScreenshot();
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("arguments[0].click();", loginButton);
             }
@@ -80,13 +82,14 @@ public class Homepage {
             shopButton.click();
         } catch (Exception e) {
             CommonFunctions.clickElement(shopButton);
-            Utils.takeScreenshot();
+            takeScreenshot();
             throw new RuntimeException(e);
         }
 
     }
 
     public String getDisplayName() {
+        takeScreenshot("displayName", displayName,true);
         return displayName.getText();
     }
 }

@@ -1,4 +1,4 @@
-package utils;
+package automation.utils;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -15,6 +15,7 @@ public class FrameworkProperties {
         try {
             Properties properties = new Properties();
             String propertiesFileName = Constants.PROP_FILE_NAME;
+
             inputStream = getClass().getClassLoader().getResourceAsStream(propertiesFileName);
 
             if (inputStream != null){

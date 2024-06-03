@@ -1,14 +1,15 @@
 package Tests;
 
-import Pages.*;
-import drivers.DriverSingleton;
+import automation.Pages.*;
+import automation.*;
+import automation.drivers.DriverSingleton;
 import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
-import utils.Constants;
-import utils.FrameworkProperties;
+import automation.utils.Constants;
+import automation.utils.FrameworkProperties;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

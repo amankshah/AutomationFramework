@@ -1,7 +1,4 @@
-package utils;
-
-import java.nio.file.LinkOption;
-import utils.FrameworkProperties;
+package automation.utils;
 
 public class Constants {
     public static final String PROP_FILE_NAME = "framework.properties";

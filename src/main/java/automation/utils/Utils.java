@@ -1,6 +1,6 @@
-package utils;
+package automation.utils;
 
-import drivers.DriverSingleton;
+import automation.drivers.DriverSingleton;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -20,7 +20,7 @@ public class Utils {
 
     public static boolean takeScreenshot(String screenShotName) {
         File file = ((TakesScreenshot) DriverSingleton.getDriver()).getScreenshotAs(OutputType.FILE);
-        String screenShotPath = Constants.SCREENSHOT_FOLDER+screenShotName+ "-"+ getRandomString(5)+"_"+getDateTime() + ".png";
+        String screenShotPath = Constants.SCREENSHOT_FOLDER+getTodayDate()+"\\"+screenShotName+ "-"+ getRandomString(2)+"_"+getDateTime() + ".png";
 
         boolean ssTaken;
         try {
@@ -52,6 +52,38 @@ public class Utils {
         }
     }
 
+    public static void takeScreenshot(String screenShotName, WebElement element,boolean center) {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) DriverSingleton.getDriver();
+
+            // Get the element's position and size
+            int elementPosition = element.getLocation().getY();
+            int elementHeight = element.getSize().getHeight();
+
+            // Get the window's inner height
+            int windowHeight = ((Number) js.executeScript("return window.innerHeight")).intValue();
+            int scrollPosition;
+
+
+            if(center) {
+            // Calculate the scroll position to center the element
+             scrollPosition = elementPosition - (windowHeight / 2) + (elementHeight / 2);
+            }else{
+                scrollPosition = elementPosition;
+            }
+                // Scroll to the calculated position
+                js.executeScript("window.scrollTo(0, arguments[0]);", scrollPosition);
+
+            // Ensure the element is focused
+            js.executeScript("arguments[0].focus();", element);
+
+            // Take the screenshot
+            takeScreenshot(screenShotName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
     public static String getRandomString(int length) {
@@ -75,4 +107,9 @@ public class Utils {
         return String.format("%1$tY%1$tm%1$td-%1$tH%1$tM%1$tS", date);
     }
 
+    //Get Today's Date in DDMMYY format
+    public static String getTodayDate() {
+        java.util.Date date = new java.util.Date();
+        return String.format("%1$td%1$tm%1$tY", date);
+    }
 }

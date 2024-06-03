@@ -1,12 +1,12 @@
-import Pages.*;
-import drivers.DriverSingleton;
-import org.openqa.selenium.WebDriver;
-import utils.CommonFunctions;
-import utils.Constants;
-import utils.FrameworkProperties;
-import utils.Utils;
+import automation.Pages.*;
 
-import static utils.Utils.getRandomString;
+import automation.drivers.DriverSingleton;
+import org.openqa.selenium.WebDriver;
+import automation.utils.Constants;
+import automation.utils.FrameworkProperties;
+import automation.utils.Utils;
+
+import static automation.utils.Utils.getRandomString;
 
 public class Main {
 
@@ -35,7 +35,7 @@ public class Main {
         Utils.takeScreenshot("Homepage");
         Utils.takeScreenshot();
         homepage.clickLoginButton();
-            signInPage.logIn(frameworkProperties.getProperty("username"),frameworkProperties.getProperty("password"));
+            signInPage.logIn(frameworkProperties.getProperty("signinuser"),frameworkProperties.getProperty("password"));
 
         if(homepage.getDisplayName().equals(frameworkProperties.getProperty("username"))){
             System.out.println("User  is logedin sucessfully");

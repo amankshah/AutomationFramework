@@ -1,16 +1,16 @@
-package Pages;
+package automation.Pages;
 
-import drivers.DriverSingleton;
+import automation.drivers.DriverSingleton;
+import automation.utils.Utils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.CommonFunctions;
-import utils.Constants;
-import utils.Utils;
+import automation.utils.CommonFunctions;
+import automation.utils.Constants;
 
-import static utils.Constants.ORDER_STATUS;
+import static automation.utils.Constants.ORDER_STATUS;
 
 public class Checkout {
     private WebDriver driver;
@@ -135,7 +135,7 @@ public class Checkout {
             System.out.println("Order Status: " + orderStatus.getText());
             System.out.println("Order Number: " + orderNumber.getText());
 //            utils.Utils.takeScreenshot();
-            Utils.takeScreenshot("OrderPlaced",orderStatus);
+            Utils.takeScreenshot("OrderPlaced",orderNumber,true);
             System.out.println("Conrgatuations, your order has been placed!🎉");
         }else{
             System.out.println("Order Status: " + orderStatus.getText());

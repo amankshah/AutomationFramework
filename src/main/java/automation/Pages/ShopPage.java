@@ -1,14 +1,13 @@
-package Pages;
+package automation.Pages;
 
-import drivers.DriverSingleton;
+import automation.drivers.DriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.CommonFunctions;
-import utils.Constants;
+import automation.utils.CommonFunctions;
 
 public class ShopPage {
     private WebDriver driver;
@@ -36,10 +35,15 @@ public class ShopPage {
         System.out.println("addToCartButton Button is displayed: "+ addToCartButton.isDisplayed());
 
         try {
-            CommonFunctions.clickElement(addToCartButton);
+            try {
+                addToCartButton.click();
+            } catch (Exception e) {
+
+                CommonFunctions.clickElement(addToCartButton);
+                throw new RuntimeException(e);
+            }
         }catch(Exception e){
             System.out.println("Standard click failed, Adding to cart using Url");
-
             driver.get("https://bitheap.tech/shop/?add-to-cart=211");
         }
 
@@ -59,7 +63,15 @@ public class ShopPage {
         wait.until(ExpectedConditions.elementToBeClickable(cartButton));
 
         System.out.println("cartButton is displayed: "+ cartButton.isDisplayed());
-        cartButton.click();
+        try {
+            try {
+                cartButton.click();
+            } catch (Exception e) {
+                CommonFunctions.clickElement(cartButton);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
