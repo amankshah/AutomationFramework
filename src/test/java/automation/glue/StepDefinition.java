@@ -8,6 +8,7 @@ import automation.utils.ConfigurationProperties;
 import automation.utils.Constants;
 import automation.utils.FrameworkProperties;
 import automation.utils.Utils;
+import automation.utils.log4j.Log;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
@@ -53,6 +54,15 @@ public class StepDefinition {
         shopPage = new ShopPage();
         TestCases[] tests= TestCases.values();
         test = reports.startTest(tests[Utils.testCount].getTestName());
+
+        // Initialize Log4j
+        Log.initialize();
+        Log.getLogData(Log.class.getName());
+        Log.startTest(tests[Utils.testCount].getTestName());
+
+        Log.getLogData(Log.class.getName());
+        Log.startTest(tests[Utils.testCount].getTestName());
+
         Utils.testCount++;
 
     }
@@ -61,6 +71,7 @@ public class StepDefinition {
     public void i_go_to_the_website() {
         driver=DriverSingleton.getDriver();
         driver.get(Constants.URL);
+        Log.info("Navigated to " + Constants.URL);
         test.log(LogStatus.PASS, "Navigated to " + Constants.URL);
 
     }
@@ -68,20 +79,24 @@ public class StepDefinition {
     @When("^I click on Login Button")
     public void i_click_on_login_button() {
         homepage.clickLoginButton();
+        Log.info("Clicked on Login Button");
         test.log(LogStatus.PASS, "Clicked on Login Button");
     }
 
     @When("^I specify my credentials and click Login")
     public void i_specify_my_credentials_and_click_login() {
         signInPage.logIn(configurationProperties.getSignInUser(), configurationProperties.getPassword());
+        Log.info("Added Credentials and Clicked on Submit Buttons");
         test.log(LogStatus.PASS, "Added Credentials and Clicked on Submit Buttons");
     }
     @Then("^I can log into the website")
     public void i_can_log_into_the_website() {
         if (homepage.getDisplayName().contains("Hello")) {
             test.log(LogStatus.PASS, "Logged In Successful");
+            Log.pass("Logged In Successful");
         }else{
             test.log(LogStatus.FAIL, "Login Failed");
+            Log.fail("Login Failed");
         }
         assertTrue(homepage.getDisplayName().contains("Hello"));
 
@@ -94,6 +109,7 @@ public class StepDefinition {
     @When("^I click on Shop Button")
     public void i_click_on_shop_button() {
         homepage.clickShopButton();
+        Log.info("Clicked on Shop Button");
         test.log(LogStatus.PASS, "Clicked on Shop Button");
     }
 
@@ -101,15 +117,18 @@ public class StepDefinition {
     public void i_add_product_to_cart() throws InterruptedException {
         shopPage.ShortProducts();
         shopPage.addProductToCart();
+        Log.info("Added Product to Cart");
         test.log(LogStatus.PASS, "Added Product to Cart");
     }
 
     @When("^I confirm address, shipping, payment and final order")
     public void i_confirm_address_shipping_payment_and_final_order() {
         shopPage.clickOnCartButton();
+        Log.info("Clicked on Cart Button");
         cartPage.clickOnProceedButton();
         checkout.fillAddressDetails();
         checkout.placeOrder();
+        Log.info("Placed Order");
         test.log(LogStatus.PASS, "Placed Order");
 
     }
@@ -117,8 +136,10 @@ public class StepDefinition {
     @Then("^The element are bought")
     public void the_element_are_bought() {
         if (checkout.getOrderStatus().contains(Constants.ORDER_STATUS)) {
+            Log.pass("Order Placed");
             test.log(LogStatus.PASS, "Order Placed");
         }else{
+            Log.fail("Order Failed");
             test.log(LogStatus.FAIL, "Order Failed");
 
         }
