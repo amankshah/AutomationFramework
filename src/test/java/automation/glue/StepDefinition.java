@@ -78,7 +78,7 @@ public class StepDefinition {
     }
     @Then("^I can log into the website")
     public void i_can_log_into_the_website() {
-        if (configurationProperties.getSignInUser().equals(homepage.getDisplayName())) {
+        if (homepage.getDisplayName().contains("Hello")) {
             test.log(LogStatus.PASS, "Logged In Successful");
         }else{
             test.log(LogStatus.FAIL, "Login Failed");

@@ -1,2 +1,6 @@
 amanshah
 Aman@123
+
+
+git reset --hard AutomationFramework/master
+git push --force
