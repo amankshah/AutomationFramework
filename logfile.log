@@ -1,0 +1,13 @@
+2024-06-05 01:34:47,216 INFO  [Log] Starting test: Testing the authentication  
+2024-06-05 01:34:47,217 INFO  [Log] Starting test: Testing the authentication  
+2024-06-05 01:34:48,643 INFO  [Log] Navigated to https://bitheap.tech/ 
+2024-06-05 01:34:56,163 INFO  [Log] Clicked on Login Button 
+2024-06-05 01:34:57,182 INFO  [Log] Added Credentials and Clicked on Submit Buttons 
+2024-06-05 01:35:15,005 INFO  [Log] Starting test: Testing the purchase of items 
+2024-06-05 01:35:15,005 INFO  [Log] Starting test: Testing the purchase of items 
+2024-06-05 01:35:23,736 INFO  [Log] Navigated to https://bitheap.tech/ 
+2024-06-05 01:35:37,260 INFO  [Log] Clicked on Shop Button 
+2024-06-05 01:35:49,186 INFO  [Log] Added Product to Cart 
+2024-06-05 01:36:01,257 INFO  [Log] Clicked on Cart Button 
+2024-06-05 01:36:33,585 INFO  [Log] Placed Order 
+2024-06-05 01:36:40,885 INFO  [Log] Test passed: Order Placed 
